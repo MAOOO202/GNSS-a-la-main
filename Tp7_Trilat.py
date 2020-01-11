@@ -44,7 +44,7 @@ class Trilat():
                            (self.X0[2]-self.PosSat[i][2])**2)
             p_approche.append(dist)
         #print(p_approche)
-        nb = len(self.X0)
+        nb = len(X0)
         B = np.zeros(Nb)
         n = Nb-nb
         #print("\nn\n",n,"\nNb\n",Nb,"\nbn\n",nb)
@@ -65,14 +65,14 @@ class Trilat():
         X_sol = np.dot(Ninv,C)
         #print("\nSolution:\n",X_sol)
         #print("\nv:\n",V)
-        self.X_com = self.X0+X_sol
+        self.X_com = X0+X_sol
         #print("\nX compensé:\n",X)
   
             
         self.Qxx = Ninv
         self.V = B - np.dot(A,X_sol)
         self.cdtr = c*X_sol[3]
-        self.sigma0_2 = np.dot(self.V.T,self.V)/n
+        self.sigma0_2 = np.dot(V.T,V)/n
         
         return self.X_com,self.cdtr,self.V,self.sigma0_2,self.Qxx
 
@@ -122,3 +122,4 @@ if __name__ == "__main__":
           "\nEstimateur unitaire corrigé:\n",sigma0_2, 
           "\nRésidus corrigé\n",V,
           "\nEstimateur\n corrigé",SigmaX)
+
